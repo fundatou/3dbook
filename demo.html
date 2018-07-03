@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>翻书demo</title>
+    <style>
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            width: 400px;
+            height: 250px;
+            perspective: 400px;
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%);
+        }
+        .book {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            perspective: 1400px;
+            transform-style: preserve-3d;
+            transform: rotateX(63deg) translateZ(-168px);
+            transform-origin: bottom center;
+        }
+        .page {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 400px;
+            height: 250px;
+            transform-style: preserve-3d;
+            transition: all ease 1s;
+        }
+        .page_openning > .side_left {
+            transition: all ease 1s;
+            transform: rotateY(-180deg);
+        }
+        .close_left > .side_right {
+            transition: all ease 1s;
+            transform: rotateY(180deg);
+        }
+        .close_left > .side_left {
+            transform: rotateY(-180deg);
+        }
+        .side_left, .side_right {
+            width: 200px;
+            height: 100%;
+            transform-origin: left center;
+        }
+        .page_right {
+            background: #eeeeee;
+            border-bottom-right-radius: 14px;
+            border-top-right-radius: 14px;
+        }
+        .page_left {
+            background: #bebebe80;
+            border-bottom-left-radius: 14px;
+            border-top-left-radius: 14px;
+            transform: rotateY(180deg);
+        }
+        .page_left, .page_right {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 197px;
+            height: 100%;
+            line-height: 250px;
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+            transform-style: preserve-3d;
+        }
+        .book-shadow {
+            width: 343px;
+            height: 27px;
+            background: url(http://jdc.jd.com/fd/pp/maimang/img/book_shadow.png) center center / 343px 21px no-repeat;
+            position: absolute;
+            top: 342px;
+            left: 29px;
+        }
+     </style>
+</head>
+<body>
+    <div class="container">
+        <div class="book">
+            <div id="lastPage" class="page">
+                <div class="page_right">7</div>
+            </div>
+            <div id="page2" class="page">
+                <div class="page_right">6</div>
+                <div class="page_left">5</div>
+            </div>
+            <div id="page1" class="page">
+                <div class="side_left">
+                    <div class="page_left">3</div>
+                </div>
+                <div class="side_right">
+                    <div class="page_right">4</div>
+                </div>
+            </div>
+            <div id="page0" class="page page_openning">
+                <div class="side_left">
+                    <div class="page_left">1</div>
+                </div>
+                <div class="side_right">
+                    <div class="page_right">2</div>
+                </div>
+            </div>
+        </div>
+        <div class="book-shadow"></div>
+    </div>
+    <script>
+        var page0 = document.getElementById('page0');
+        var page1 = document.getElementById('page1');
+        page0.getElementsByClassName('page_right')[0].addEventListener('click', function() {
+            page1.setAttribute('class', 'page page_openning');
+            page0.setAttribute('class', 'page close_left');
+        });
+    </script>
+</body>
+</html>
