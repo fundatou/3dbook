@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>翻书demo</title>
     <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            background-color: #0E1326;
+        }
         .container {
             position: absolute;
             top: 50%;
@@ -90,9 +96,6 @@
                 opacity: 0;
             }
         }
-
-
-
 
 
         .turn_left .unfold {
@@ -236,30 +239,34 @@
         .ele {
             background-size: 100% 100%;
             position: absolute;
-            transform: 50% 100%;
-            transition: transform ease 2s 1s, margin ease 2s 1s;
+            transform-origin: 50% 100%;
+            transition: transform ease 2s 1s, opacity ease 2s 0.9s;
         }
 
         .unfold .ele {
             opacity: 1;
-            transform: rotateX(90deg);
+            transform: rotateX(-65deg);
         }
         .unfold .e_skew {
             animation: mountFold ease 3s forwards;
         }
         @keyframes mountFold {
             0%, 66% {
-                transform: rotateX(-90deg) scaleY(0);
+                transform: rotateX(-65deg) scaleY(0);
             }
             100% {
-                transform: rotateX(-90deg) scaleY(1);
+                transform: rotateX(-65deg) scaleY(1);
             }
         }
         .unfold .e_skew_sin_l {
-            transform: rotateX(-90deg) rotateY(-15deg);
+            transform: rotateX(-65deg) rotateY(-15deg);
         }
         .unfold .e_skew_sin_r {
-            transform: rotateX(-90deg) rotateY(15deg);
+            transform: rotateX(-65deg) rotateY(15deg);
+        }
+        .fold_left .ele, .fold_right .ele {
+            opacity: 0;
+            transition: all ease 1s, opacity ease 0.4s 1s;
         }
         .pre_page .ele {
             opacity: 0;
@@ -270,10 +277,10 @@
         }
         @keyframes mountUnfold {
             0% {
-                transform: rotateX(-90deg) scaleY(1);
+                transform: rotateX(-65deg) scaleY(1);
             }
             32%, 100% {
-                transform: rotateX(-90deg) scaleX(0)
+                transform: rotateX(-65deg) scaleY(0)
             }
         }
 
@@ -281,34 +288,285 @@
             transition: all ease 0.3s, opacity ease 0.4s 1s;
         }
 
+        #page1 .ele_1 {
+            width: 50px;
+            height: 90px;
+            bottom: 154px;
+            left: 50px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/building1.png);
+        }
+        #page1 .ele_2 {
+            width: 140px;
+            height: 154px;
+            right: -70px;
+            bottom: 140px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/building2n.png)
+        }
+
+        #page1 .ele_3 {
+            width: 100px;
+            height: 110px;
+            bottom: 135px;
+            left: 80px;
+        }
+        #page1 .ele_3 i {
+            width: 20px;
+            display: block;
+            position: absolute;
+            bottom: 0;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/launchingtower.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        #page1 .ele_3 i:nth-child(1) {
+            height: 100px;
+            left: 0;
+        }
+        #page1 .ele_3 i:nth-child(2) {
+            height: 140px;
+            left: 40px;
+        }
+        #page1 .ele_3 i:nth-child(3) {
+            height: 90px;
+            left: 80px;
+        }
+
+        #page2 .ele_1 {
+            width: 100px;
+            height: 300px;
+            bottom: 160px;
+            right: -52px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/skyscraper.png);
+        }
+        #page2 .ele_2 {
+            width: 85px;
+            height: 160px;
+            bottom: 100px;
+            right: -42px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/building5n.png);
+        }
+        #page2 .ele_3 {
+            width: 120px;
+            height: 110px;
+            bottom: 76px;
+            right: 37px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/buildings1n.png);
+        }
+        #page2 .ele_4 {
+            width: 110px;
+            height: 90px;
+            bottom: 65px;
+            left: 10px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/buildings2.png);
+        }
+        #page2 .ele_5 {
+            width: 110px;
+            height: 180px;
+            bottom: 110px;
+            left: 50px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/buildings3.png);
+        }
+
+        #page3 .ele_1 {
+            width: 60px;
+            height: 160px;
+            bottom: 155px;
+            right: 8px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/hand1.png);
+        }
+        #page3 .ele_2 {
+            width: 60px;
+            height: 160px;
+            bottom: 119px;
+            right: 94px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/hand2.png);
+        }
+        #page3 .ele_3 {
+            width: 20px;
+            height: 20px;
+            bottom: 100px;
+            right: 133px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/tree.png);
+        }
+        #page3 .ele_4 {
+            width: 20px;
+            height: 20px;
+            bottom: 60px;
+            right: 30px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/tree.png);
+        }
+        #page3 .ele_5 {
+            width: 40px;
+            height: 20px;
+            bottom: 62px;
+            right: 38px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/hill.png);
+        }
+        #page3 .ele_6 {
+            width: 40px;
+            height: 130px;
+            bottom: 17px;
+            right: 52px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/hand3.png);
+        }
+        #page3 .arm {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-size: 100% auto;
+        }
+        #page3 .ele_7 {
+            width: 100px;
+            height: 120px;
+            bottom: 160px;
+            left: 30px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/gun.png);
+        }
+        #page3 .ele_7 .arm {
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/gun_arm2.png);
+        }
+        #page3 .ele .bloods {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .bloods i {
+            width: 14px;
+            height: 7px;
+            position: absolute;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/blood.png);
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            transition: all ease .2s 3s, opacity linear .1s 3s;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+        .unfold .ele .bloods i {
+            opacity: 1;
+        }
+        #page3 .ele_7 .bloods i:nth-child(1) {
+            top: 0;
+            left: -15px;
+        }
+        #page3 .ele_7 .bloods i:nth-child(2) {
+            top: -10px;
+            left: -29px;
+        }
+        #page3 .ele_7 .bloods i:nth-child(3) {
+            top: 10px;
+            left: -24px;
+        }
+        #page3 .ele_7 .bloods i:nth-child(4) {
+            top: 5px;
+            left: -40px;
+        }
+
+        #page3 .ele_8 {
+            width: 100px;
+            height: 100px;
+            bottom: 87px;
+            left: 49px;
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/gun.png);
+        }
+        #page3 .ele_8 .arm {
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/gun_arm3.png);
+        }
+        #page3 .ele_8 .bloods i:nth-child(1) {
+            top: -4px;
+            left: -15px;
+        }
+        #page3 .ele_8 .bloods i:nth-child(2) {
+            top: -13px;
+            left: -32px;
+        }
+        #page3 .ele_8 .bloods i:nth-child(3) {
+            top: 5px;
+            left: -21px;
+        }
+        #page3 .ele_8 .bloods i:nth-child(4) {
+            top: 5px;
+            left: -40px;
+        }
+        #page3 .ele_8 .bloods i:nth-child(5) {
+            top: -5px;
+            left: -29px;
+        }
+        #page3 .ele_8 .bloods i:nth-child(6) {
+            top: 2px;
+            left: -58px;
+        }
+        #page3 .ele_8 .bloods i:nth-child(7) {
+            top: -5px;
+            left: -51px;
+        }
      </style>
 </head>
 <body>
     <div class="container">
         <div id="book" class="book">
                 <div id="page3" class="page fold_right">
-                    <div class="side side_left">7</div>
-                    <div class="side side_right">8</div>
+                    <div class="side side_left">
+                        <span class="ele ele_1"></span>
+                        <span class="ele ele_2"></span>
+                        <span class="ele ele_3 e_skew_sin_l"></span>
+                        <span class="ele ele_4 e_skew_sin_l"></span>
+                        <span class="ele ele_5 e_skew_sin_l"></span>
+                        <span class="ele ele_6"></span>
+                    </div>
+                    <div class="side side_right">
+                        <span class="ele ele_7 e_skew">
+                            <span class="arm"></span>
+                            <span class="bloods">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </span>
+                        <span class="ele ele_8 e_skew">
+                            <span class="arm"></span>
+                            <span class="bloods">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </span>
+                        </span>
+                    </div>
                 </div>
             <div id="page2" class="page fold_right">
-                <div class="side side_left">5</div>
-                <div class="side side_right">6</div>
+                <div class="side side_left">
+                    <span class="ele ele_1 e_skew"></span> 
+                    <span class="ele ele_2"></span>
+                    <span class="ele ele_3 e_skew_sin_l"></span>
+                </div>
+                <div class="side side_right">
+                    <span class="ele_4 ele e_skew_sin_r"></span>
+                    <span class="ele_5 ele e_skew_sin_r"></span>
+                </div>
             </div>
             <div id="page1" class="page fold_right">
                 <div class="side side_left">
-                    3
+                    <span class="ele ele_1"></span>
+                    <span class="ele ele_2 e_skew"></span>
                 </div>
                 <div class="side side_right">
-                    4
+                    <span class="ele ele_3 e_skew_sin_r">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </span>
                 </div>
             </div>
             <div id="page0" class="page">
-                <div class="side side_left">
-                    1
-                </div>
-                <div class="side side_right">
-                    2
-                </div>
+                <div class="side side_left">1</div>
+                <div class="side side_right">2</div>
             </div>
         </div>
         <div class="book-shadow"></div>
@@ -330,7 +588,6 @@
             sideRight.addEventListener('click', function() {
                 if (currentPage !== lastPage) {
                     book.setAttribute('class', 'book turn_left');
-
                     if (currentPage - 1 >= 0) {
                         pageList[currentPage - 1].setAttribute('class', 'page fold_left');
                     }
