@@ -18,56 +18,21 @@
             transform: translate(-50%, -50%);
         }
         .book {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             height: 100%;
+        }
+        .page {
+            position: absolute;
+            width: 400px;
+            height: 250px;
+            /* transition: all ease 1s; */
             perspective: 1400px;
             transform-style: preserve-3d;
             transform: rotateX(63deg) translateZ(-168px);
             transform-origin: bottom center;
         }
-        .page {
+        .side {
             position: absolute;
             top: 0;
-            left: 50%;
-            width: 400px;
-            height: 250px;
-            transform-style: preserve-3d;
-            transition: all ease 1s;
-        }
-        .page_openning > .side_left {
-            transition: all ease 1s;
-            transform: rotateY(-180deg);
-        }
-        .close_left > .side_right {
-            transition: all ease 1s;
-            transform: rotateY(180deg);
-        }
-        .close_left > .side_left {
-            transform: rotateY(-180deg);
-        }
-        .side_left, .side_right {
-            width: 200px;
-            height: 100%;
-            transform-origin: left center;
-        }
-        .page_right {
-            background: #eeeeee;
-            border-bottom-right-radius: 14px;
-            border-top-right-radius: 14px;
-        }
-        .page_left {
-            background: #bebebe80;
-            border-bottom-left-radius: 14px;
-            border-top-left-radius: 14px;
-            transform: rotateY(180deg);
-        }
-        .page_left, .page_right {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 197px;
             height: 100%;
             line-height: 250px;
@@ -75,52 +40,317 @@
             color: #fff;
             font-size: 24px;
             transform-style: preserve-3d;
+            backface-visibility: hidden;
+            background-size: 200% 100%;
+        }
+        .side_right {
+            background-color: #dddddd;
+            border-bottom-right-radius: 14px;
+            border-top-right-radius: 14px;
+            left: 50%;
+            transform-origin: left;
+            background-position: right top;
+        }
+        .side_left {
+            background-color: #cdcdcd;
+            border-bottom-left-radius: 14px;
+            border-top-left-radius: 14px;
+            left: 3px;
+            transform-origin: right;
+            background-position: left top;
         }
         .book-shadow {
             width: 343px;
             height: 27px;
-            background: url(http://jdc.jd.com/fd/pp/maimang/img/book_shadow.png) center center / 343px 21px no-repeat;
+            background: url(http://jdc.jd.com/fd/pp/maimang/img/book_shadow.png) center center no-repeat;
+            background-size: 343px 21px;
             position: absolute;
             top: 342px;
             left: 29px;
         }
+        .pre_page {
+            z-index: 10;
+            animation: zfold step-end 2s 0.4s forwards, hide step-end 2s 0.4s forwards;
+        }
+        @keyframes zflod {
+            0% {
+                z-index: 9;
+                transform: rotateX(63deg) translateZ(-167px);
+            }
+            33.5%, 100% {
+                z-index: 9;
+                transform: rotateX(63deg) translateZ(-168px);
+            }
+        }
+        @keyframes hide {
+            0%, 90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+
+
+
+
+        .turn_left .unfold {
+            z-index: 9;
+            animation: zunfold_left step-end 2s 0.4s forwards;
+        }
+        @keyframes zunfold_left {
+            0% {
+                z-index: 9;
+                transform: rotateX(63deg) translateZ(-168px);
+            }
+            33.5%, 100% {
+                z-index: 10;
+                transform: rotateX(63deg) translateZ(-167px);
+            }
+        }
+        .turn_left .unfold .side_left {
+            animation: unfoldleft ease 2s 0.5s forwards, pn_pagecolor_re ease 2s 0.5s forwards;
+        }
+        @keyframes unfoldleft {
+            0% {
+                transform: rotateY(180deg);
+            }
+            100% {
+                transform: rotateY(0deg);
+            }
+        }
+        @keyframes pn_pagecolor_re {
+            0% {
+                background-color: #a2a2a2;
+            }
+            100% {
+                background-color: #cdcdcd;
+            }
+        }
+        .turn_left .unfold .side_right {
+            animation: pn_pagecolor_l ease 2s 0.5s forwards;
+        }
+        @keyframes pn_pagecolor_l {
+            0% {
+                background-color: #cdcdcd;
+            }
+            100% {
+                background-color: #dddddd;
+            }
+        }
+        .turn_left .pre_page .side_right {
+            animation: turnleft ease 2s 0.5s forwards, pagecolor_sr ease 2s 0.5s forwards;
+        }
+        @keyframes turnleft {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(-180deg);
+            }
+        }
+        @keyframes pagecolor_sr {
+            0% {
+                background-color: #dddddd;
+            }
+            10% {
+                background-color: #cdcdcd;
+            }
+            100% {
+                background-color: #a2a2a2;
+            }
+        }
+        .turn_left .pre_page .side_left {
+            animation: pagecolor_sl ease 2s 0.5s forwards;
+        }
+        @keyframes pagecolor_sl {
+            0% {
+                background-color: #cdcdcd;
+            }
+            100% {
+                background-color: #a2a2a2;
+            }
+        }
+
+
+
+        .turn_right .unfold {
+            z-index: 9;
+            animation: zunfold_right step-end 2s 0.4s forwards;
+        }
+        @keyframes zunfold_right {
+            0% {
+                z-index: 9;
+                transform: rotateX(63deg) translateZ(-168px);
+            }
+            33.5%, 100% {
+                z-index: 10;
+                transform: rotateX(63deg) translateZ(-167px);
+            }
+        }
+        
+        .turn_right .unfold .side_left {
+            /* 颜色变化和左翻一样 */
+            animation: pn_pagecolor_re ease 2s 0.5s forwards;
+        }
+        
+        .turn_right .unfold .side_right {
+            /* 颜色变化和左翻一样 */
+            animation: unfoldright ease 2s 0.5s forwards, pn_pagecolor_l ease 2s 0.5s forwards;
+        }
+        @keyframes unfoldright {
+            0% {
+                transform: rotateY(-180deg);
+            }
+            100% {
+                transform: rotateY(0deg);
+            }
+        }
+        .turn_right .pre_page .side_right {
+            animation: pagecolor_sr_r ease 2s 0.5s forwards;
+        }
+        .turn_right .pre_page .side_left {
+            animation: turnright ease 2s 0.5s forwards, pagecolor_sl ease 2s 0.5s forwards;
+        }
+        @keyframes turnright {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(180deg);
+            }
+        }
+
+
+        #page1 .side {
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/bg_1n.png);
+        }
+        #page2 .side {
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/bg_2n.png);
+        }
+        #page3 .side {
+            background-image: url(http://jdc.jd.com/fd/pp/maimang/img/pn/bg_4.png);
+        }
+
+        .ele {
+            background-size: 100% 100%;
+            position: absolute;
+            transform: 50% 100%;
+            transition: transform ease 2s 1s, margin ease 2s 1s;
+        }
+
+        .unfold .ele {
+            opacity: 1;
+            transform: rotateX(90deg);
+        }
+        .unfold .e_skew {
+            animation: mountFold ease 3s forwards;
+        }
+        @keyframes mountFold {
+            0%, 66% {
+                transform: rotateX(-90deg) scaleY(0);
+            }
+            100% {
+                transform: rotateX(-90deg) scaleY(1);
+            }
+        }
+        .unfold .e_skew_sin_l {
+            transform: rotateX(-90deg) rotateY(-15deg);
+        }
+        .unfold .e_skew_sin_r {
+            transform: rotateX(-90deg) rotateY(15deg);
+        }
+        .pre_page .ele {
+            opacity: 0;
+            transition: all ease 1s, opacity ease 0.4s 1s;
+        }
+        .pre_page .e_skew {
+            animation: mountUnfold ease 3s forwards;
+        }
+        @keyframes mountUnfold {
+            0% {
+                transform: rotateX(-90deg) scaleY(1);
+            }
+            32%, 100% {
+                transform: rotateX(-90deg) scaleX(0)
+            }
+        }
+
+        .e_skew {
+            transition: all ease 0.3s, opacity ease 0.4s 1s;
+        }
+
      </style>
 </head>
 <body>
     <div class="container">
-        <div class="book">
-            <div id="lastPage" class="page">
-                <div class="page_right">7</div>
-            </div>
-            <div id="page2" class="page">
-                <div class="page_right">6</div>
-                <div class="page_left">5</div>
-            </div>
-            <div id="page1" class="page">
-                <div class="side_left">
-                    <div class="page_left">3</div>
+        <div id="book" class="book">
+                <div id="page3" class="page fold_right">
+                    <div class="side side_left">7</div>
+                    <div class="side side_right">8</div>
                 </div>
-                <div class="side_right">
-                    <div class="page_right">4</div>
+            <div id="page2" class="page fold_right">
+                <div class="side side_left">5</div>
+                <div class="side side_right">6</div>
+            </div>
+            <div id="page1" class="page fold_right">
+                <div class="side side_left">
+                    3
+                </div>
+                <div class="side side_right">
+                    4
                 </div>
             </div>
-            <div id="page0" class="page page_openning">
-                <div class="side_left">
-                    <div class="page_left">1</div>
+            <div id="page0" class="page">
+                <div class="side side_left">
+                    1
                 </div>
-                <div class="side_right">
-                    <div class="page_right">2</div>
+                <div class="side side_right">
+                    2
                 </div>
             </div>
         </div>
         <div class="book-shadow"></div>
     </div>
     <script>
+        const lastPage = 3;
+        const firstPage = 0;
+        const prefix = 'page';
+
+        var currentPage = 0;
+        var book = document.getElementById('book');
+        var sideRightList = document.getElementsByClassName('side_right');
         var page0 = document.getElementById('page0');
         var page1 = document.getElementById('page1');
-        page0.getElementsByClassName('page_right')[0].addEventListener('click', function() {
-            page1.setAttribute('class', 'page page_openning');
-            page0.setAttribute('class', 'page close_left');
+        var page2 = document.getElementById('page2');
+        var page3 = document.getElementById('page3');
+        const pageList = [page0, page1, page2, page3];
+        Array.prototype.forEach.call(sideRightList, function(sideRight) {
+            sideRight.addEventListener('click', function() {
+                if (currentPage !== lastPage) {
+                    book.setAttribute('class', 'book turn_left');
+
+                    if (currentPage - 1 >= 0) {
+                        pageList[currentPage - 1].setAttribute('class', 'page fold_left');
+                    }
+                    pageList[currentPage].setAttribute('class', 'page fold_left pre_page');
+                    pageList[++currentPage].setAttribute('class', 'page unfold');
+                }
+            });
+        });
+        var sideLeftList = document.getElementsByClassName('side_left');
+        Array.prototype.forEach.call(sideLeftList, function(sideLeft) {
+            sideLeft.addEventListener('click', function() {
+                if (currentPage !== firstPage) {
+                    book.setAttribute('class', 'book turn_right');
+                    if (currentPage + 1 <= lastPage) {
+                        pageList[currentPage + 1].setAttribute('class', 'page fold_right');
+                    }
+                    pageList[currentPage].setAttribute('class', 'page fold_right pre_page');
+                    pageList[--currentPage].setAttribute('class', 'page unfold');
+                }
+            });
         });
     </script>
 </body>
