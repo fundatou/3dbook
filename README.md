@@ -1,2 +1,3 @@
 # 3dbook
-3d book CSS3 and webgl
+
+相关说明 https://fundatou.github.io/2018/07/09/3dbook/
